@@ -1,16 +1,16 @@
 name: Backend CI Pipeline
 
-# Trigger: Run this robot whenever code is pushed to the 'main' branch
+# Run this robot whenever code is pushed to the 'main' branch
 on:
   push:
     branches: [ "main" ]
 
 jobs:
   build-and-test:
-    runs-on: ubuntu-latest # The robot uses a Linux machine
+    runs-on: ubuntu-latest # The robot uses a Linux machine to run
     
     steps:
-    # Step 1: Download your code
+    # Step 1: Download the code
     - uses: actions/checkout@v3
     
     # Step 2: Install Python
@@ -19,13 +19,13 @@ jobs:
       with:
         python-version: "3.9"
         
-    # Step 3: Install your libraries to make sure they work
+    # Step 3: Install libraries
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
         pip install fastapi uvicorn python-multipart
         
-    # Step 4: Run a "Lint" check (Checks for syntax errors)
+    # Step 4: Run a syntax error check on backend code
     - name: Check for Syntax Errors
       run: |
         python -m compileall backend/
